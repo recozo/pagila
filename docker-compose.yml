@@ -3,11 +3,12 @@ volumes:
   pgdata:
 services:
   pagila:
-    image: postgres:13.2
-    container_name: pagila
+    image: postgres:16-bookworm
+    container_name: postgres_container
     environment:
-      POSTGRES_PASSWORD: 123456
+      POSTGRES_PASSWORD: testpass2024
       POSTGRES_USER: postgres
+      POSTGRES_DB: pagila
     volumes:
       - ./pagila-schema.sql:/docker-entrypoint-initdb.d/1-pagila-schema.sql
       - ./pagila-data.sql:/docker-entrypoint-initdb.d/2-pagila-data.sql
@@ -17,11 +18,11 @@ services:
     ports:
       - 5432:5432
   pgadmin:
-    container_name: pgadmin4_container
+    container_name: pgadmin_container
     image: dpage/pgadmin4
     restart: always
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@admin.com
-      PGADMIN_DEFAULT_PASSWORD: root
+      PGADMIN_DEFAULT_PASSWORD: testpass2024
     ports:
-      - "5050:80"
+      - "5431:80"

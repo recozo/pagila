@@ -55,9 +55,16 @@ SELECT * FROM film WHERE fulltext @@ to_tsquery('fate&india');
 
 pgAdmin is included in the docker-compose.
 
-Navigate to the URL : http://localhost:5050/
+Navigate to the URL : http://localhost:5431/
 Default Username: admin@admin.com
-Default Password: root
+Default Password: testpass2024
+
+在 pgAdmin 中连接数据库时注意添写参数有二种方法
+1、使用宿主机的 IP 地址来访问 pagila 容器映射在主机上的服务，此时在 connection 参数中的 Hostname/address 
+应该写入宿主机的 IP 地址，在 Port 中写入 5432
+2、使用 Docker 网络来访问 pagila 容器的服务，此时在 connection 参数中的 Hostname/address 
+可以写入 pagila 容器的 IP 地址（可以使用 docker network inspect 查看）或容器名称（在 docker-compose.yml 
+指定为 pagila），在 Port 中写入 5432
 
 ## PARTITIONED TABLES
 
@@ -209,12 +216,12 @@ pagila=#
 ```
 ````
 
-## CREATE DATABASE ON [DOCKER-COMPOSE](https://docs.docker.com/compose/)
+## CREATE DATABASE ON [DOCKER COMPOSE](https://docs.docker.com/compose/)
 
 1. Run:
 
 ```
-docker-compose up
+docker compose up -d
 ```
 
 2. Done! Just use:
