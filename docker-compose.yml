@@ -2,8 +2,8 @@ version: "3"
 volumes:
   pgdata:
 services:
-  pagila:
-    image: postgres:16-bookworm
+  postgres:
+    image: postgres:14-bullseye
     container_name: postgres_container
     environment:
       POSTGRES_PASSWORD: testpass2024
@@ -25,4 +25,4 @@ services:
       PGADMIN_DEFAULT_EMAIL: admin@admin.com
       PGADMIN_DEFAULT_PASSWORD: testpass2024
     ports:
-      - "5431:80"
+      - "80:80"
